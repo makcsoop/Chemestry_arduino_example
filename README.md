@@ -1,1 +1,2 @@
-# Chemestry_arduino_example
+# Chemistry project "Electrolysis bath"
+=====================
