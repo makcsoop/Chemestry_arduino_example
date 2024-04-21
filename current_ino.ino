@@ -1,3 +1,6 @@
+// import the required libs below
+
+
 #include <SPI.h>
 #include <Wire.h> 
 #include <Adafruit_GFX.h>
@@ -16,9 +19,11 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define LOGO_HEIGHT   16
 #define LOGO_WIDTH    16
 
-#define VERIF 5.1
+#define VERIF 5.1 // Voltage on pin
 
-static const unsigned char PROGMEM logo_bmp[] =
+#define mosfet_pin 3 // pin that controls the MOSFET
+
+static const unsigned char PROGMEM logo_bmp[] = // logo bitmap
 { B00000000, B11000000,
   B00000001, B11000000,
   B00000001, B11000000,
@@ -36,8 +41,13 @@ static const unsigned char PROGMEM logo_bmp[] =
   B01110000, B01110000,
   B00000000, B00110000 };
 
+  int pot;
+  int out;
+
 void setup() {
   Serial.begin(115200);
+
+  pinMode(mosfet_pin, OUTPUT); // define control pin as output
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { 
@@ -52,12 +62,6 @@ void setup() {
 
   // Clear the buffer
   display.clearDisplay();
-
-  // display.display() is NOT necessary after every single drawing command,
-  // unless that's what you want...rather, you can batch up a bunch of
-  // drawing operations and then update the screen all at once by calling
-  // display.display(). These examples demonstrate both approaches...
-
 }
 
 void loop() {
@@ -68,16 +72,20 @@ void loop() {
 void testdrawstyles(void) {
   display.clearDisplay();
 
-  display.setTextSize(2);            // Normal 1:1 pixel scale
+  display.setTextSize(2);            // 2:1 pixel scale
   display.setTextColor(WHITE);       // Draw white text
-  display.setCursor(15,17);            // Start at top-left corner
+  display.setCursor(15,17);            // Start x: 15, y: 17
 
-  float voltage = (float)analogRead(A1) * VERIF / 1024;
-  float current = (float)voltage / 1000;
+  float voltage = (float)analogRead(A1) * VERIF / 1024; // voltage read from analog pin A1
+  float current = (float)voltage; // (float)voltage / 1000 for basic math
 
-  String output = String("V:") + voltage + " V  " + "I:" + current + " A";
+  pot = analogRead(A1); // reading data from potentiometer
+  out = map(pot, 0, 1023, 0, 255); // transferring the potentiometer value for writing to the digital mosfet port
+  analogWrite(mosfet_pin, out); // writing data to the digital mosfet port
 
-  display.println(output);
+  String output = String("V:") + voltage + " V  " + "I:" + current + " mA"; // output string on display
+
+  display.println(output); // writing output on the screen
 
   display.display();
   delay(2);
