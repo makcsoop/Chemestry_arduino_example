@@ -27,6 +27,6 @@ The project was implemented on the basis of the `Arduino Nano` board.
   * power board
 ---
 1. To upload the code to the board you will need software [ArduinoIDE(official site)](https://www.arduino.cc/en/software).
-2. Next, select the `COM port` to which your board is connected, then select the `type of your board`. **Note:** if you are using Arduino nano in the processor section, to avoid any problems with loading, select ATmega328P (Old Bootloader). If you have a different board and still have problems loading the software, try doing the same. Perhaps this will be the solution to your problem.
+2. Next, select the `tools -> COM port` to which your board is connected, then select the `type of your board`. **Note:** if you are using Arduino nano in the processor section, to avoid any problems with loading, select ATmega328P (Old Bootloader). If you have a different board and still have problems loading the software, try doing the same. Perhaps this will be the solution to your problem.
 3. Paste the software from the file `current ino.ino` into Arduino IDE.
 4. Click the upload button.
