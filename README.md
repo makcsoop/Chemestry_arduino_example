@@ -1,6 +1,6 @@
 # Chemistry project "Electrolysis bath"
 ---
-This repository provides code examples for the OLED matrix `Adafruit lib example for oled.ino`, as well as the current project code required for the operation of the electronics `current_ino.ino`. The `electronic circuit.png` file contains a diagram of the connection of electronic components.
+This [repository](https://youtu.be/dQw4w9WgXcQ?si=2A3OTN-mXz0fHq9t) provides code examples for the OLED matrix `Adafruit lib example for oled.ino`, as well as the current project code required for the operation of the electronics `current_ino.ino`. The `electronic circuit.png` file contains a diagram of the connection of electronic components.
 **Libraries used:**
 1. `SPI` - Serial Peripheral Interface (SPI), sometimes called a 4-wire interface, is a serial synchronous data transfer interface.
 Unlike I2C and UART, SPI requires more signals to operate but can operate at higher speeds. Does not support addressing, instead uses the SS (slave select) signal, which is also sometimes called CS (chip select), CE (chip enable) or SE (slave enable). Supports only one master per bus. The master sets the communication speed and other parameters such as polarity and clock phase. Data exchange occurs in full duplex mode, which means devices on the bus can simultaneously transmit and receive data. The interface uses the following signals (in AVR nomenclature, to obtain the exact names of the signals, refer to the technical documentation of the chip you are working with):
